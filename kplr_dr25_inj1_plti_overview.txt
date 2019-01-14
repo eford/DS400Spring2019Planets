@@ -1,0 +1,66 @@
+# Which collumns to use for what
+
+Identifiers (useful for crossmatching, but not as a feature in learning process):
+\ KIC_ID
+\     The KIC ID of the target star
+\ TCE_ID
+\     The Threshold Crossing Event (TCE) identifier, consisting of the Kepler Input Catalog (KIC) ID, followed by a dash, and then the planet number
+
+We expect that most important input feature will be:
+\ Expected_MES
+\     The expected multiple event statistic (MES) of the injected signal
+Other columns from this file that students could choose to use as features:
+\ Sky_Group
+\     The sky group of the target star 
+\ i_period
+\     The orbital period (days) of the injected signal
+\ i_epoch
+\     The epoch (BJD-2454833) of the injected signal
+\ N_Transit
+\     The number of valid transits contributing to the expected MES signal
+\ i_depth
+\     The central transit depth (ppm) of the injected signal, measured after aperture corrections have been applied
+\ i_dur
+\     The transit duration (hours) of the injected signal
+\ i_b
+\     The impact parameter of the injected signal
+\ i_ror
+\     The ratio of the planet radius to the stellar radius for the injected signal
+\ i_dor
+\     The ratio of the semi-major axis of the planetary orbit to the stellar radius for the injected signal
+
+Goal is to accurately predict the output field:
+\ Recovered
+\     A flag indicating successful (1) or unsuccessful (0) recovery of the injected signal by the search pipeline
+
+Students should NOT use the following as features for the first project (since they can't be know before running the pipeline):  
+\ EB_injection
+\     A flag indicating whether a simulated eclipsing binary signal was injected on the target star 
+\ Offset_from_source
+\     A flag indicating whether the transit signal was injected on the target star or offset from the target star
+\ Offset_distance
+\     For targets injected off the target source, the distance from the target source location to the location of the injected signal (in arcseconds)
+\ Measured_MES
+\     The maximum multiple event statistic (MES) measured by the pipeline on the recovered signal
+\ r_period
+\     The orbital period (days) of the recovered signal
+\ r_epoch
+\     The epoch (BJD-2454833) of the recovered signal
+\ r_depth
+\     The central transit depth (ppm) of the recovered signal
+\ r_dur
+\     The transit duration (hours) of the recovered signal
+\ r_b
+\     The impact parameter of the recovered signal
+\ r_ror
+\     The ratio of the planet radius to the stellar radius for the recovered signal
+\ r_dor
+\     The ratio of the semi-major axis of the planetary orbit to the stellar radius for the recovered signal
+\ Fit_Provenance
+\     A flag indicating if the fit information comes from supplemental DV fits (1) or original DV fits (0)
+\
+As described in Sec 5 of https://exoplanetarchive.ipac.caltech.edu/docs/KSCI-19110-001.pdf , many astronomers are using a model 
+
+prob(Pipeline detects a planet as a TCE | Expected_MES ) = 0.94 * cdf(Gamma(30.87,0.271), Expected_MES )
+
+Some astronomers are using a more sophisticated models (e.g., applying adjustments that students could read about in https://exoplanetarchive.ipac.caltech.edu/docs/KSCI-19109-002.pdf), I think that this simple model is a good benchmark for students to beat. 
